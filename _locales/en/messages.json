@@ -1,0 +1,320 @@
+{
+  "extDescription": {
+    "message": "Selection and full-page translation with any OpenAI-compatible API (BYOK)"
+  },
+  "brand": {
+    "message": "Umbra · AI Translator"
+  },
+  "popupTitle": {
+    "message": "Umbra · AI Translator"
+  },
+  "popupDesc": {
+    "message": "Select text to translate, or translate the whole page."
+  },
+  "actTranslatePage": {
+    "message": "Translate whole page"
+  },
+  "actRestore": {
+    "message": "Restore original"
+  },
+  "actOpenOptions": {
+    "message": "Open settings"
+  },
+  "stChecking": {
+    "message": "Checking…"
+  },
+  "stKeyOk": {
+    "message": "Key configured"
+  },
+  "stKeyMissing": {
+    "message": "No key"
+  },
+  "stUnknown": {
+    "message": "Unknown status"
+  },
+  "stLocalMode": {
+    "message": "$1 · Local"
+  },
+  "msgSetKeyShort": {
+    "message": "Set your API key in the settings page first."
+  },
+  "msgNoPageTab": {
+    "message": "Cannot communicate with this page (restricted page?)."
+  },
+  "msgPageStarted": {
+    "message": "Full-page translation started; watch the page for updates."
+  },
+  "msgInjectFailed": {
+    "message": "Failed to inject content script: $1"
+  },
+  "msgPageFailed": {
+    "message": "Full-page translation failed"
+  },
+  "msgRestoring": {
+    "message": "Restoring original text…"
+  },
+  "msgRestoreFailed": {
+    "message": "Restore failed"
+  },
+  "msgRestoreRequested": {
+    "message": "Restore requested."
+  },
+  "msgTranslatingPage": {
+    "message": "Requesting full-page translation…"
+  },
+  "optionsTitle": {
+    "message": "Umbra · Settings"
+  },
+  "optionsSubtitle": {
+    "message": "Pick a model provider, enter your API key, and start translating."
+  },
+  "secNavProvider": {
+    "message": "Provider"
+  },
+  "secPrefs": {
+    "message": "Preferences"
+  },
+  "labelModel": {
+    "message": "Model"
+  },
+  "labelApiKey": {
+    "message": "API Key"
+  },
+  "labelBaseUrl": {
+    "message": "API Base URL"
+  },
+  "labelLang": {
+    "message": "Target language"
+  },
+  "phCustomModel": {
+    "message": "Enter model ID"
+  },
+  "actSave": {
+    "message": "Save settings"
+  },
+  "actTest": {
+    "message": "Test translation"
+  },
+  "footerBy": {
+    "message": "© 2025 Umbra. Made with love by"
+  },
+  "stSaved": {
+    "message": "Settings saved."
+  },
+  "stSaving": {
+    "message": "Saving…"
+  },
+  "stTesting": {
+    "message": "Testing translation…"
+  },
+  "stTestOk": {
+    "message": "Test succeeded: $1"
+  },
+  "stTestFailed": {
+    "message": "Test failed"
+  },
+  "stNeedBaseUrl": {
+    "message": "Please enter the API Base URL."
+  },
+  "stProviderNeedsKey": {
+    "message": "$1 selected. Enter your API key and save."
+  },
+  "stProviderNoKey": {
+    "message": "$1 selected. Save to use it."
+  },
+  "ddPlaceholder": {
+    "message": "Select…"
+  },
+  "ddSearch": {
+    "message": "Search…"
+  },
+  "ddEmpty": {
+    "message": "No matches"
+  },
+  "ddCustomModel": {
+    "message": "Custom model…"
+  },
+  "ddLoading": {
+    "message": "Loading model list…"
+  },
+  "ddLoadFailed": {
+    "message": "Failed to load model list; enter a model ID manually"
+  },
+  "hintEndpoint": {
+    "message": "Requests go to $1/chat/completions"
+  },
+  "hintEndpointCustom": {
+    "message": "Requests go to {baseUrl}/chat/completions"
+  },
+  "provName_openai": {
+    "message": "OpenAI"
+  },
+  "provName_deepseek": {
+    "message": "DeepSeek"
+  },
+  "provName_moonshot": {
+    "message": "Kimi (Moonshot)"
+  },
+  "provName_zhipu": {
+    "message": "Zhipu GLM"
+  },
+  "provName_qwen": {
+    "message": "Qwen (Alibaba)"
+  },
+  "provName_ollama": {
+    "message": "Ollama"
+  },
+  "provName_openrouter": {
+    "message": "OpenRouter"
+  },
+  "provName_custom": {
+    "message": "Custom"
+  },
+  "provDesc_openai": {
+    "message": "GPT-6 / GPT-5.6 family"
+  },
+  "provHint_openai": {
+    "message": "Create it at platform.openai.com → API Keys."
+  },
+  "provDesc_deepseek": {
+    "message": "DeepSeek V4.1 / V4 family"
+  },
+  "provHint_deepseek": {
+    "message": "Create it at platform.deepseek.com → API Keys."
+  },
+  "provDesc_moonshot": {
+    "message": "Moonshot Kimi K3 / K2 family"
+  },
+  "provHint_moonshot": {
+    "message": "Create it at platform.moonshot.cn (CN endpoint)."
+  },
+  "provDesc_zhipu": {
+    "message": "GLM-5.3 / GLM-5 family"
+  },
+  "provHint_zhipu": {
+    "message": "Create it at open.bigmodel.cn (CN endpoint)."
+  },
+  "provDesc_qwen": {
+    "message": "Alibaba Bailian Qwen3.8 family"
+  },
+  "provHint_qwen": {
+    "message": "Create it in the Alibaba Cloud Bailian console."
+  },
+  "provDesc_ollama": {
+    "message": "Runs locally, no API key needed"
+  },
+  "provHint_ollama": {
+    "message": "No key needed; make sure ollama serve is running."
+  },
+  "provDesc_openrouter": {
+    "message": "Model router; list fetched automatically"
+  },
+  "provHint_openrouter": {
+    "message": "Create it at openrouter.ai/keys."
+  },
+  "provDesc_custom": {
+    "message": "Any OpenAI-compatible endpoint"
+  },
+  "provHint_custom": {
+    "message": "Requests go to {baseUrl}/chat/completions"
+  },
+  "bubbleTranslating": {
+    "message": "Translating…"
+  },
+  "bubbleResult": {
+    "message": "Translation"
+  },
+  "bubbleFailed": {
+    "message": "Translation failed"
+  },
+  "bubbleClose": {
+    "message": "Close"
+  },
+  "bubbleWorking": {
+    "message": "Translating…"
+  },
+  "bubbleNoKey": {
+    "message": "No API key yet — set it in the settings page."
+  },
+  "bubbleRetry": {
+    "message": "Retry"
+  },
+  "bubbleRestored": {
+    "message": "Restored $1 original texts."
+  },
+  "bubbleNothing": {
+    "message": "No translated text to restore on this page."
+  },
+  "pageTranslateDone": {
+    "message": "Full-page translation done: $1 texts translated. Click \"Restore original\" in the extension popup."
+  },
+  "msgInvalidBatch": {
+    "message": "Invalid batch translation response"
+  },
+  "msgSetKey": {
+    "message": "Configure your API key in the settings first"
+  },
+  "errNetwork": {
+    "message": "Network error: $1"
+  },
+  "errNetworkPlain": {
+    "message": "Network error"
+  },
+  "errEmpty": {
+    "message": "The API returned empty content"
+  },
+  "errNoStream": {
+    "message": "Streaming is not supported in this environment"
+  },
+  "errStreamRead": {
+    "message": "Stream read failed: $1"
+  },
+  "errStreamReadPlain": {
+    "message": "Stream read failed"
+  },
+  "errUnknownMessage": {
+    "message": "Unknown message type"
+  },
+  "errNoTab": {
+    "message": "No active tab found"
+  },
+  "menuTranslateSelection": {
+    "message": "Translate selection"
+  },
+  "menuTranslatePage": {
+    "message": "Translate whole page"
+  },
+  "menuRestore": {
+    "message": "Restore original"
+  },
+  "lang_zh": {
+    "message": "Simplified Chinese"
+  },
+  "lang_zhTW": {
+    "message": "Traditional Chinese"
+  },
+  "lang_en": {
+    "message": "English"
+  },
+  "lang_ja": {
+    "message": "Japanese"
+  },
+  "lang_ko": {
+    "message": "Korean"
+  },
+  "lang_fr": {
+    "message": "French"
+  },
+  "lang_de": {
+    "message": "German"
+  },
+  "lang_es": {
+    "message": "Spanish"
+  },
+  "lang_ru": {
+    "message": "Russian"
+  },
+  "lang_pt": {
+    "message": "Portuguese"
+  }
+}

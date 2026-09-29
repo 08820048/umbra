@@ -1,0 +1,320 @@
+{
+  "extDescription": {
+    "message": "划词翻译与全文翻译，支持 OpenAI 兼容 API（自带 Key）"
+  },
+  "brand": {
+    "message": "Umbra·AI翻译"
+  },
+  "popupTitle": {
+    "message": "Umbra·AI翻译"
+  },
+  "popupDesc": {
+    "message": "划词即可翻译；也可一键翻译整页。"
+  },
+  "actTranslatePage": {
+    "message": "翻译整个网页"
+  },
+  "actRestore": {
+    "message": "恢复原文"
+  },
+  "actOpenOptions": {
+    "message": "打开选项"
+  },
+  "stChecking": {
+    "message": "检测中…"
+  },
+  "stKeyOk": {
+    "message": "已配置 Key"
+  },
+  "stKeyMissing": {
+    "message": "未配置 Key"
+  },
+  "stUnknown": {
+    "message": "状态未知"
+  },
+  "stLocalMode": {
+    "message": "$1 · 本地"
+  },
+  "msgSetKeyShort": {
+    "message": "请先打开选项页填写 API Key。"
+  },
+  "msgNoPageTab": {
+    "message": "无法与当前页面通信（可能是特殊页面）。"
+  },
+  "msgPageStarted": {
+    "message": "已开始全文翻译，请查看页面提示。"
+  },
+  "msgInjectFailed": {
+    "message": "无法注入内容脚本：$1"
+  },
+  "msgPageFailed": {
+    "message": "全文翻译失败"
+  },
+  "msgRestoring": {
+    "message": "正在恢复原文…"
+  },
+  "msgRestoreFailed": {
+    "message": "恢复失败"
+  },
+  "msgRestoreRequested": {
+    "message": "已请求恢复原文。"
+  },
+  "msgTranslatingPage": {
+    "message": "正在请求全文翻译…"
+  },
+  "optionsTitle": {
+    "message": "Umbra · 设置"
+  },
+  "optionsSubtitle": {
+    "message": "选择模型服务商，填入 API Key，即可开始翻译。"
+  },
+  "secNavProvider": {
+    "message": "提供商设置"
+  },
+  "secPrefs": {
+    "message": "翻译偏好"
+  },
+  "labelModel": {
+    "message": "模型"
+  },
+  "labelApiKey": {
+    "message": "API Key"
+  },
+  "labelBaseUrl": {
+    "message": "API Base URL"
+  },
+  "labelLang": {
+    "message": "目标语言"
+  },
+  "phCustomModel": {
+    "message": "输入模型 ID"
+  },
+  "actSave": {
+    "message": "保存设置"
+  },
+  "actTest": {
+    "message": "测试翻译"
+  },
+  "footerBy": {
+    "message": "© 2025 Umbra. Made with love by"
+  },
+  "stSaved": {
+    "message": "已保存设置。"
+  },
+  "stSaving": {
+    "message": "正在保存…"
+  },
+  "stTesting": {
+    "message": "正在测试翻译…"
+  },
+  "stTestOk": {
+    "message": "测试成功：$1"
+  },
+  "stTestFailed": {
+    "message": "测试失败"
+  },
+  "stNeedBaseUrl": {
+    "message": "请填写 API Base URL。"
+  },
+  "stProviderNeedsKey": {
+    "message": "已选择 $1，填入 API Key 后保存。"
+  },
+  "stProviderNoKey": {
+    "message": "已选择 $1，保存后即可使用。"
+  },
+  "ddPlaceholder": {
+    "message": "请选择"
+  },
+  "ddSearch": {
+    "message": "搜索…"
+  },
+  "ddEmpty": {
+    "message": "无匹配项"
+  },
+  "ddCustomModel": {
+    "message": "自定义模型…"
+  },
+  "ddLoading": {
+    "message": "正在加载模型列表…"
+  },
+  "ddLoadFailed": {
+    "message": "模型列表加载失败，可手动输入模型 ID"
+  },
+  "hintEndpoint": {
+    "message": "将请求 $1/chat/completions"
+  },
+  "hintEndpointCustom": {
+    "message": "将请求 {baseUrl}/chat/completions"
+  },
+  "provName_openai": {
+    "message": "OpenAI"
+  },
+  "provName_deepseek": {
+    "message": "DeepSeek"
+  },
+  "provName_moonshot": {
+    "message": "Kimi (Moonshot)"
+  },
+  "provName_zhipu": {
+    "message": "智谱 GLM"
+  },
+  "provName_qwen": {
+    "message": "通义千问"
+  },
+  "provName_ollama": {
+    "message": "Ollama"
+  },
+  "provName_openrouter": {
+    "message": "OpenRouter"
+  },
+  "provName_custom": {
+    "message": "自定义"
+  },
+  "provDesc_openai": {
+    "message": "GPT-6 / GPT-5.6 系列模型"
+  },
+  "provHint_openai": {
+    "message": "在 platform.openai.com 的 API Keys 页面创建。"
+  },
+  "provDesc_deepseek": {
+    "message": "DeepSeek V4.1 / V4 系列"
+  },
+  "provHint_deepseek": {
+    "message": "在 platform.deepseek.com 的 API Keys 页面创建。"
+  },
+  "provDesc_moonshot": {
+    "message": "月之暗面 Kimi K3 / K2 系列"
+  },
+  "provHint_moonshot": {
+    "message": "在 platform.moonshot.cn 的 API Keys 页面创建（国内端点）。"
+  },
+  "provDesc_zhipu": {
+    "message": "GLM-5.3 / GLM-5 系列"
+  },
+  "provHint_zhipu": {
+    "message": "在 open.bigmodel.cn 的 API Keys 页面创建（国内端点）。"
+  },
+  "provDesc_qwen": {
+    "message": "阿里云百炼 Qwen3.8 系列"
+  },
+  "provHint_qwen": {
+    "message": "在阿里云百炼控制台创建 API Key。"
+  },
+  "provDesc_ollama": {
+    "message": "本地运行，无需 API Key"
+  },
+  "provHint_ollama": {
+    "message": "本地模型无需 API Key，需先运行 ollama serve。"
+  },
+  "provDesc_openrouter": {
+    "message": "多模型聚合路由，模型列表自动拉取"
+  },
+  "provHint_openrouter": {
+    "message": "在 openrouter.ai/keys 创建 API Key。"
+  },
+  "provDesc_custom": {
+    "message": "任意 OpenAI 兼容接口"
+  },
+  "provHint_custom": {
+    "message": "将请求 {baseUrl}/chat/completions"
+  },
+  "bubbleTranslating": {
+    "message": "翻译中…"
+  },
+  "bubbleResult": {
+    "message": "翻译结果"
+  },
+  "bubbleFailed": {
+    "message": "翻译失败"
+  },
+  "bubbleClose": {
+    "message": "关闭"
+  },
+  "bubbleWorking": {
+    "message": "正在翻译…"
+  },
+  "bubbleNoKey": {
+    "message": "尚未配置 API Key，请先打开选项页填写。"
+  },
+  "bubbleRetry": {
+    "message": "重试"
+  },
+  "bubbleRestored": {
+    "message": "已恢复 $1 处原文。"
+  },
+  "bubbleNothing": {
+    "message": "当前页面没有可恢复的译文。"
+  },
+  "pageTranslateDone": {
+    "message": "全文翻译完成：已翻译 $1 处文本。可在扩展弹窗中点击「恢复原文」。"
+  },
+  "msgInvalidBatch": {
+    "message": "无效的批量翻译响应"
+  },
+  "msgSetKey": {
+    "message": "请先在选项页配置 API Key"
+  },
+  "errNetwork": {
+    "message": "网络错误: $1"
+  },
+  "errNetworkPlain": {
+    "message": "网络错误"
+  },
+  "errEmpty": {
+    "message": "API 返回空内容"
+  },
+  "errNoStream": {
+    "message": "当前环境不支持流式响应"
+  },
+  "errStreamRead": {
+    "message": "流式读取失败: $1"
+  },
+  "errStreamReadPlain": {
+    "message": "流式读取失败"
+  },
+  "errUnknownMessage": {
+    "message": "未知消息类型"
+  },
+  "errNoTab": {
+    "message": "未找到活动标签页"
+  },
+  "menuTranslateSelection": {
+    "message": "翻译选中文本"
+  },
+  "menuTranslatePage": {
+    "message": "翻译整个网页"
+  },
+  "menuRestore": {
+    "message": "恢复原文"
+  },
+  "lang_zh": {
+    "message": "简体中文"
+  },
+  "lang_zhTW": {
+    "message": "繁體中文"
+  },
+  "lang_en": {
+    "message": "英语"
+  },
+  "lang_ja": {
+    "message": "日语"
+  },
+  "lang_ko": {
+    "message": "韩语"
+  },
+  "lang_fr": {
+    "message": "法语"
+  },
+  "lang_de": {
+    "message": "德语"
+  },
+  "lang_es": {
+    "message": "西班牙语"
+  },
+  "lang_ru": {
+    "message": "俄语"
+  },
+  "lang_pt": {
+    "message": "葡萄牙语"
+  }
+}

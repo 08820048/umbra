@@ -1,0 +1,26 @@
+/* Kami 深色变体（暖黑），仅扩展页面使用；划词气泡不加载本文件。 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --wt-bg: #141413;
+    --wt-surface: #30302e;
+    --wt-sunken: #292927;
+    --wt-sand: #3a3a37;
+    --wt-text: #e8e6dc;
+    --wt-text-2: #b0aea5;
+    --wt-text-3: #97948b;
+    --wt-text-4: #7d7a72;
+    --wt-brand: #2d5a8a;
+    --wt-brand-hover: #366b9f;
+    --wt-brand-tint: #212e3d;
+    --wt-tag-bg: #22303f;
+    --wt-border: #3a3a37;
+    --wt-border-soft: #33332f;
+    --wt-ok: #7fbf9a;
+    --wt-ok-bg: #24352b;
+    --wt-warn: #d3a066;
+    --wt-warn-bg: #3a2f21;
+    --wt-err: #d98a80;
+    --wt-err-bg: #3d2624;
+  }
+}

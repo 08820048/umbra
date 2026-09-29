@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Umbra · 设置</title>
+    <script type="module" crossorigin src="/assets/index.html-tdDmKDUz.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="modulepreload" crossorigin href="/assets/storage-o5h3BD7D.js">
+    <link rel="modulepreload" crossorigin href="/assets/i18n-DciqKMqZ.js">
+    <link rel="modulepreload" crossorigin href="/assets/messaging-5R6JVYIl.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BacEfgt-.css">
+  </head>
+  <body>
+    <main class="container">
+      <header class="page-head">
+        <h1 data-i18n="brand">Umbra·AI翻译</h1>
+        <p class="subtitle" data-i18n="optionsSubtitle">选择模型服务商，填入 API Key，即可开始翻译。</p>
+      </header>
+
+      <form id="settings-form">
+        <div class="page-layout">
+          <nav class="settings-nav">
+            <button
+              type="button"
+              class="settings-nav-item active"
+              data-section="provider"
+              data-i18n="secNavProvider"
+            >
+              提供商设置
+            </button>
+            <button
+              type="button"
+              class="settings-nav-item"
+              data-section="prefs"
+              data-i18n="secPrefs"
+            >
+              翻译偏好
+            </button>
+          </nav>
+
+          <div class="settings-content">
+            <section id="section-provider" class="settings-section">
+              <div class="provider-layout">
+                <div id="provider-list" class="provider-list"></div>
+
+                <div class="provider-panel">
+                  <div class="panel-head">
+                    <h3 id="panel-title"></h3>
+                    <p id="panel-desc" class="wt-hint"></p>
+                  </div>
+
+                  <div class="field" id="model-field">
+                    <span class="field-label" data-i18n="labelModel">模型</span>
+                    <div id="model-dropdown"></div>
+                    <input
+                      id="modelCustom"
+                      class="wt-input"
+                      type="text"
+                      data-i18n-placeholder="phCustomModel"
+                      placeholder="输入模型 ID"
+                      hidden
+                    />
+                  </div>
+
+                  <label class="field" id="apiKey-field">
+                    <span class="field-label" data-i18n="labelApiKey">API Key</span>
+                    <input
+                      id="apiKey"
+                      class="wt-input"
+                      type="password"
+                      autocomplete="off"
+                    />
+                    <small class="wt-hint" id="key-hint"></small>
+                  </label>
+
+                  <label class="field" id="baseUrl-field">
+                    <span class="field-label" data-i18n="labelBaseUrl">API Base URL</span>
+                    <input id="baseUrl" class="wt-input" type="url" />
+                    <small class="wt-hint" id="baseUrl-hint"></small>
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <section id="section-prefs" class="settings-section" hidden>
+              <div class="settings-panel">
+                <div class="field">
+                  <span class="field-label" data-i18n="labelLang">目标语言</span>
+                  <div id="lang-dropdown"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="save-btn" class="wt-btn" data-i18n="actSave">保存设置</button>
+          <button type="button" id="test-btn" class="wt-btn secondary" data-i18n="actTest">测试翻译</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+      </form>
+
+      <footer class="page-footer">
+        <span data-i18n="footerBy">© 2025 Umbra. Made with love by</span>
+        <a href="https://x.com/xuyidev" target="_blank" rel="noopener noreferrer">XuYi</a>
+      </footer>
+    </main>
+  </body>
+</html>
