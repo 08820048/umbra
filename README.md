@@ -1,8 +1,19 @@
+<p align="center">
+  <img src="public/icons/icon128.png" width="96" alt="Umbra">
+</p>
+
 # Umbra · 网页 AI 翻译（Manifest V3）
 
 Chrome / Edge 浏览器扩展：划词翻译 + 全文翻译，使用 OpenAI 兼容 Chat Completions API（自带 API Key / BYOK）。
 
 代码以 [MIT 许可证](LICENSE) 开源。
+
+<p align="center">
+  <img src="docs/images/options-provider.jpg" width="720" alt="提供商设置">
+</p>
+<p align="center">
+  <img src="docs/images/options-prefs.jpg" width="720" alt="翻译偏好">
+</p>
 
 ## 功能
 
