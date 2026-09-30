@@ -134,6 +134,12 @@
   "hintAutoTranslate": {
     "message": "开启后选中文本立即翻译，不再显示工具条。"
   },
+  "labelStreaming": {
+    "message": "流式输出"
+  },
+  "hintStreaming": {
+    "message": "逐字显示翻译过程，关闭后一次性返回结果。"
+  },
   "footerBy": {
     "message": "© 2025 Umbra. Made with love by"
   },

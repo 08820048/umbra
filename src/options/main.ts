@@ -35,6 +35,7 @@ const testBtn = document.getElementById('test-btn') as HTMLButtonElement;
 const autoTranslateEl = document.getElementById(
   'autoTranslate',
 ) as HTMLInputElement;
+const streamingEl = document.getElementById('streaming') as HTMLInputElement;
 
 const modelDropdown = createDropdown();
 (document.getElementById('model-dropdown') as HTMLElement).append(modelDropdown.el);
@@ -219,6 +220,7 @@ async function load(): Promise<void> {
   }
   apiKeyEl.value = settings.apiKey || '';
   autoTranslateEl.checked = Boolean(settings.autoTranslateOnSelect);
+  streamingEl.checked = settings.streamingEnabled !== false;
   fillLanguages(settings.targetLanguage || 'zh');
 }
 
@@ -239,6 +241,7 @@ function readForm(): Settings {
     model: model || provider.defaultModel || DEFAULT_SETTINGS.model,
     targetLanguage: (langDropdown.getValue() as TargetLanguage) || 'zh',
     autoTranslateOnSelect: autoTranslateEl.checked,
+    streamingEnabled: streamingEl.checked,
   };
 }
 

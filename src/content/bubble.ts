@@ -203,6 +203,9 @@ export function showBubble(
   }
 
   stopTimer();
+  // 内部状态重建（loading/stream/result 间切换）不是用户关闭，
+  // 不应触发 onDismiss 回调，否则会误清正在进行的流式状态
+  onDismissCb = null;
   dismissBubble();
 
   const el = document.createElement('div');

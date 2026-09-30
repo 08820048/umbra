@@ -34,9 +34,46 @@ let pageBusy = false;
 interface StreamState {
   requestId: string;
   text: string;
+  shown: number;
+  timer: number | null;
+  finalText: string | null;
   opts: BubbleOptions;
 }
 let streamState: StreamState | null = null;
+
+function stopStreamTimer(state: StreamState): void {
+  if (state.timer !== null) {
+    window.clearInterval(state.timer);
+    state.timer = null;
+  }
+}
+
+// 平滑追赶动画：chunks 成批到达时逐帧渐显，避免整段直接砸出来
+function startStreamAnimation(state: StreamState): void {
+  if (state.timer !== null) return;
+  state.timer = window.setInterval(() => {
+    if (streamState !== state) {
+      stopStreamTimer(state);
+      return;
+    }
+    const target = state.finalText ?? state.text;
+    if (state.shown < target.length) {
+      const step = Math.max(3, Math.ceil((target.length - state.shown) * 0.18));
+      state.shown = Math.min(target.length, state.shown + step);
+      showBubble('stream', target.slice(0, state.shown), state.opts);
+    } else if (state.finalText !== null) {
+      stopStreamTimer(state);
+      streamState = null;
+      showBubble('result', state.finalText, state.opts);
+    }
+  }, 40);
+}
+
+function clearStreamState(state: StreamState | null): void {
+  if (!state) return;
+  stopStreamTimer(state);
+  if (streamState === state) streamState = null;
+}
 
 function openOptions(): void {
   void sendMessage({ type: 'OPEN_OPTIONS' });
@@ -70,14 +107,42 @@ async function translateSelectionAt(
       void translateSelectionAt(trimmed, x, y);
     },
     onDismiss: () => {
-      if (streamState?.requestId === requestId) streamState = null;
+      if (streamState?.requestId === requestId) clearStreamState(streamState);
     },
   };
 
-  streamState = { requestId, text: '', opts };
   showBubble('loading', '', opts);
 
   try {
+    const streaming = await isStreamingEnabled();
+
+    if (!streaming) {
+      const res = await sendMessage({
+        type: 'TRANSLATE_TEXT',
+        text: trimmed,
+      });
+      if (!res.ok) {
+        showBubble(
+          res.code === 'MISSING_API_KEY' ? 'missing-key' : 'error',
+          res.error,
+          opts,
+        );
+        return;
+      }
+      if ('text' in res) showBubble('result', res.text, opts);
+      return;
+    }
+
+    const state: StreamState = {
+      requestId,
+      text: '',
+      shown: 0,
+      timer: null,
+      finalText: null,
+      opts,
+    };
+    streamState = state;
+
     const res = (await sendMessage({
       type: 'TRANSLATE_TEXT_STREAM',
       requestId,
@@ -85,23 +150,27 @@ async function translateSelectionAt(
     })) as TranslateTextResponse | ErrorResponse;
 
     if (!res.ok) {
-      streamState = null;
-      if (res.code === 'MISSING_API_KEY') {
-        showBubble('missing-key', res.error, opts);
-      } else {
-        showBubble('error', res.error, opts);
-      }
+      clearStreamState(state);
+      showBubble(
+        res.code === 'MISSING_API_KEY' ? 'missing-key' : 'error',
+        res.error,
+        opts,
+      );
       return;
     }
 
-    const finalText =
-      'text' in res && res.text ? res.text : streamState?.text || '';
-    showBubble('result', finalText, opts);
+    const finalText = 'text' in res && res.text ? res.text : state.text;
+    if (streamState === state) {
+      // 交给动画平滑播完（含不支持 SSE 的接口一次性返回的情况）
+      state.finalText = finalText;
+      startStreamAnimation(state);
+    } else {
+      showBubble('result', finalText, opts);
+    }
   } catch (err) {
-    streamState = null;
+    if (streamState?.requestId === requestId) clearStreamState(streamState);
     showBubble('error', friendlyError(err), opts);
   } finally {
-    if (streamState?.requestId === requestId) streamState = null;
     translatingSelection = false;
   }
 }
@@ -132,6 +201,17 @@ async function shouldAutoTranslate(): Promise<boolean> {
       : false;
   } catch {
     return false;
+  }
+}
+
+async function isStreamingEnabled(): Promise<boolean> {
+  try {
+    const res = await sendMessage({ type: 'GET_SETTINGS' });
+    return res.ok && 'settings' in res
+      ? res.settings.streamingEnabled !== false
+      : true;
+  } catch {
+    return true;
   }
 }
 
@@ -302,7 +382,7 @@ chrome.runtime.onMessage.addListener((message: ExtensionMessage & { text?: strin
     };
     if (streamState && streamState.requestId === requestId) {
       streamState.text += chunk;
-      showBubble('stream', streamState.text, streamState.opts);
+      startStreamAnimation(streamState);
     }
     sendResponse({ ok: true });
     return false;

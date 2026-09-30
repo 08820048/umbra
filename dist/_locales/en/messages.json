@@ -134,6 +134,12 @@
   "hintAutoTranslate": {
     "message": "Translate immediately when text is selected, without the toolbar."
   },
+  "labelStreaming": {
+    "message": "Streaming output"
+  },
+  "hintStreaming": {
+    "message": "Reveal the translation progressively; off returns the full result at once."
+  },
   "footerBy": {
     "message": "© 2025 Umbra. Made with love by"
   },

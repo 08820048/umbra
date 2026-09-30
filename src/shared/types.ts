@@ -17,6 +17,7 @@ export interface Settings {
   model: string;
   targetLanguage: TargetLanguage;
   autoTranslateOnSelect: boolean;
+  streamingEnabled: boolean;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -26,6 +27,7 @@ export const DEFAULT_SETTINGS: Settings = {
   model: 'gpt-4o-mini',
   targetLanguage: 'zh',
   autoTranslateOnSelect: false,
+  streamingEnabled: true,
 };
 
 export const LANGUAGE_LABELS: Record<TargetLanguage, string> = {
