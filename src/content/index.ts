@@ -12,6 +12,16 @@ import {
   type BubbleOptions,
 } from './bubble';
 import {
+  hideSelectionToolbar,
+  isInsideToolbar,
+  showSelectionToolbar,
+} from './toolbar';
+import {
+  closeRewritePanel,
+  isInsideRewritePanel,
+  showRewritePanel,
+} from './rewrite';
+import {
   isPageTranslated,
   restorePage,
   translatePage,
@@ -32,6 +42,14 @@ function openOptions(): void {
   void sendMessage({ type: 'OPEN_OPTIONS' });
 }
 
+function friendlyError(err: unknown): string {
+  const msg = err instanceof Error ? err.message : String(err);
+  if (msg.includes('Extension context invalidated')) {
+    return t('errRefreshPage') || msg;
+  }
+  return msg;
+}
+
 async function translateSelectionAt(
   text: string,
   x: number,
@@ -41,6 +59,7 @@ async function translateSelectionAt(
   if (!trimmed || trimmed.length > 5000) return;
   if (translatingSelection) return;
   translatingSelection = true;
+  hideSelectionToolbar();
 
   const requestId = Math.random().toString(36).slice(2);
   const opts: BubbleOptions = {
@@ -80,11 +99,7 @@ async function translateSelectionAt(
     showBubble('result', finalText, opts);
   } catch (err) {
     streamState = null;
-    showBubble(
-      'error',
-      err instanceof Error ? err.message : t('bubbleFailed'),
-      opts,
-    );
+    showBubble('error', friendlyError(err), opts);
   } finally {
     if (streamState?.requestId === requestId) streamState = null;
     translatingSelection = false;
@@ -97,32 +112,86 @@ function getSelectionText(): string {
   return sel.toString();
 }
 
+function getSelectionRect(): DOMRect | null {
+  const sel = window.getSelection();
+  if (!sel || sel.rangeCount === 0 || !sel.toString().trim()) return null;
+  return sel.getRangeAt(0).getBoundingClientRect();
+}
+
+function getSelectionRange(): Range | null {
+  const sel = window.getSelection();
+  if (!sel || sel.rangeCount === 0 || !sel.toString().trim()) return null;
+  return sel.getRangeAt(0).cloneRange();
+}
+
+async function shouldAutoTranslate(): Promise<boolean> {
+  try {
+    const res = await sendMessage({ type: 'GET_SETTINGS' });
+    return res.ok && 'settings' in res
+      ? Boolean(res.settings.autoTranslateOnSelect)
+      : false;
+  } catch {
+    return false;
+  }
+}
+
 function onMouseUp(e: MouseEvent): void {
   if (e.button !== 0) return;
   if (isInsideBubble(e.target)) return;
+  if (isInsideToolbar(e.target)) return;
+  if (isInsideRewritePanel(e.target)) return;
 
   lastMouseUp = { x: e.clientX, y: e.clientY };
 
   // Defer so selection is finalized
   setTimeout(() => {
-    const text = getSelectionText();
-    if (!text.trim()) return;
-    if (!lastMouseUp) return;
-    void translateSelectionAt(text, lastMouseUp.x, lastMouseUp.y);
+    void (async () => {
+      const text = getSelectionText();
+      if (!text.trim() || !lastMouseUp) {
+        hideSelectionToolbar();
+        return;
+      }
+      const rect = getSelectionRect();
+      const selRange = getSelectionRange();
+      if (!rect) return;
+      const { x, y } = lastMouseUp;
+      if (await shouldAutoTranslate()) {
+        hideSelectionToolbar();
+        closeRewritePanel();
+        void translateSelectionAt(text, x, y);
+        return;
+      }
+      closeRewritePanel();
+      showSelectionToolbar(rect, {
+        onTranslate: () => {
+          void translateSelectionAt(text, x, y);
+        },
+        onRewrite: () => {
+          showRewritePanel(text, selRange, rect);
+        },
+        onOpenSettings: openOptions,
+      });
+    })();
   }, 10);
 }
 
 function onKeyDown(e: KeyboardEvent): void {
   if (e.key === 'Escape') {
+    hideSelectionToolbar();
+    closeRewritePanel();
     dismissBubble();
   }
 }
 
 function onPointerDown(e: MouseEvent): void {
+  if (isInsideToolbar(e.target)) return;
   if (isInsideBubble(e.target)) return;
+  if (isInsideRewritePanel(e.target)) return;
+  closeRewritePanel();
   // Outside click dismisses bubble unless user is selecting
   const text = getSelectionText();
   if (!text.trim()) {
+    hideSelectionToolbar();
     dismissBubble();
   }
 }
@@ -163,7 +232,7 @@ async function handleFullPageTranslate(): Promise<void> {
       { x: toastX, y: toastY, onOpenOptions: openOptions },
     );
   } catch (err) {
-    const message = err instanceof Error ? err.message : t('msgPageFailed');
+    const message = friendlyError(err);
     const code = (err as Error & { code?: string }).code;
     if (code === 'MISSING_API_KEY') {
       showBubble('missing-key', message, {
@@ -220,6 +289,7 @@ chrome.runtime.onMessage.addListener((message: ExtensionMessage & { text?: strin
     const text = (message as { text?: string }).text || getSelectionText();
     const x = lastMouseUp?.x ?? window.innerWidth / 2;
     const y = lastMouseUp?.y ?? 80;
+    hideSelectionToolbar();
     void translateSelectionAt(text, x, y);
     sendResponse({ ok: true });
     return false;
@@ -249,3 +319,5 @@ chrome.runtime.onMessage.addListener((message: ExtensionMessage & { text?: strin
 document.addEventListener('mouseup', onMouseUp, true);
 document.addEventListener('keydown', onKeyDown, true);
 document.addEventListener('mousedown', onPointerDown, true);
+window.addEventListener('scroll', hideSelectionToolbar, true);
+window.addEventListener('resize', hideSelectionToolbar);

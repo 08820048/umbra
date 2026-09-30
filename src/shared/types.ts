@@ -16,6 +16,7 @@ export interface Settings {
   apiKey: string;
   model: string;
   targetLanguage: TargetLanguage;
+  autoTranslateOnSelect: boolean;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -24,6 +25,7 @@ export const DEFAULT_SETTINGS: Settings = {
   apiKey: '',
   model: 'gpt-4o-mini',
   targetLanguage: 'zh',
+  autoTranslateOnSelect: false,
 };
 
 export const LANGUAGE_LABELS: Record<TargetLanguage, string> = {

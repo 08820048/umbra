@@ -141,6 +141,18 @@ h1 {
   font-weight: 500;
   color: var(--wt-text-2);
 }
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.wt-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--wt-brand);
+  cursor: pointer;
+}
 .actions {
   display: flex;
   gap: 12px;

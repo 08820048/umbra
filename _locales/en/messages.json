@@ -95,6 +95,45 @@
   "actTest": {
     "message": "Test translation"
   },
+  "errRefreshPage": {
+    "message": "The extension was updated — refresh this page and retry."
+  },
+  "toolbarTranslate": {
+    "message": "Translate"
+  },
+  "toolbarRewrite": {
+    "message": "Translate to"
+  },
+  "rwTitle": {
+    "message": "Translate to"
+  },
+  "rwSourceLabel": {
+    "message": "Text to rewrite"
+  },
+  "rwResultLabel": {
+    "message": "Result"
+  },
+  "rwLangLabel": {
+    "message": "Rewrite as"
+  },
+  "rwStart": {
+    "message": "Rewrite"
+  },
+  "rwLoading": {
+    "message": "Rewriting…"
+  },
+  "rwConfirm": {
+    "message": "Confirm & replace"
+  },
+  "rwReplaceFail": {
+    "message": "Replace failed — the page may have updated."
+  },
+  "labelAutoTranslate": {
+    "message": "Translate on selection"
+  },
+  "hintAutoTranslate": {
+    "message": "Translate immediately when text is selected, without the toolbar."
+  },
   "footerBy": {
     "message": "© 2025 Umbra. Made with love by"
   },

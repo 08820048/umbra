@@ -1,1 +1,0 @@
-function n(a,t){try{return chrome.i18n.getMessage(a,t)||""}catch{return""}}function c(a=document){a.querySelectorAll("[data-i18n]").forEach(t=>{const e=n(t.dataset.i18n||"");e&&(t.textContent=e)}),a.querySelectorAll("[data-i18n-placeholder]").forEach(t=>{const e=n(t.dataset.i18nPlaceholder||"");e&&(t.placeholder=e)})}export{c as a,n as t};

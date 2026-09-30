@@ -32,6 +32,9 @@ const apiKeyEl = document.getElementById('apiKey') as HTMLInputElement;
 const keyHint = document.getElementById('key-hint') as HTMLElement;
 const statusEl = document.getElementById('status') as HTMLParagraphElement;
 const testBtn = document.getElementById('test-btn') as HTMLButtonElement;
+const autoTranslateEl = document.getElementById(
+  'autoTranslate',
+) as HTMLInputElement;
 
 const modelDropdown = createDropdown();
 (document.getElementById('model-dropdown') as HTMLElement).append(modelDropdown.el);
@@ -215,6 +218,7 @@ async function load(): Promise<void> {
     baseUrlEl.value = settings.baseUrl;
   }
   apiKeyEl.value = settings.apiKey || '';
+  autoTranslateEl.checked = Boolean(settings.autoTranslateOnSelect);
   fillLanguages(settings.targetLanguage || 'zh');
 }
 
@@ -234,6 +238,7 @@ function readForm(): Settings {
     apiKey: apiKeyEl.value.trim(),
     model: model || provider.defaultModel || DEFAULT_SETTINGS.model,
     targetLanguage: (langDropdown.getValue() as TargetLanguage) || 'zh',
+    autoTranslateOnSelect: autoTranslateEl.checked,
   };
 }
 

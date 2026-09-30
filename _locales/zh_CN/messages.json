@@ -95,6 +95,45 @@
   "actTest": {
     "message": "测试翻译"
   },
+  "errRefreshPage": {
+    "message": "扩展已更新，请刷新页面后重试。"
+  },
+  "toolbarTranslate": {
+    "message": "翻译"
+  },
+  "toolbarRewrite": {
+    "message": "翻译为"
+  },
+  "rwTitle": {
+    "message": "翻译为"
+  },
+  "rwSourceLabel": {
+    "message": "待改写内容"
+  },
+  "rwResultLabel": {
+    "message": "改写结果"
+  },
+  "rwLangLabel": {
+    "message": "改写为"
+  },
+  "rwStart": {
+    "message": "开始改写"
+  },
+  "rwLoading": {
+    "message": "改写中…"
+  },
+  "rwConfirm": {
+    "message": "确认替换"
+  },
+  "rwReplaceFail": {
+    "message": "替换失败，原文可能已被页面更新。"
+  },
+  "labelAutoTranslate": {
+    "message": "选中立即翻译"
+  },
+  "hintAutoTranslate": {
+    "message": "开启后选中文本立即翻译，不再显示工具条。"
+  },
   "footerBy": {
     "message": "© 2025 Umbra. Made with love by"
   },
