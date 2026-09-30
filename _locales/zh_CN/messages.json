@@ -140,6 +140,9 @@
   "hintStreaming": {
     "message": "逐字显示翻译过程，关闭后一次性返回结果。"
   },
+  "noTranslateNeeded": {
+    "message": "内容已是目标语言，无需翻译"
+  },
   "footerBy": {
     "message": "© 2025 Umbra. Made with love by"
   },

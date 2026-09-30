@@ -1,5 +1,7 @@
 import { sendMessage } from '../shared/messaging';
 import { t } from '../shared/i18n';
+import { detectLanguage, langFamily } from '../shared/langDetect';
+import type { Settings, TargetLanguage } from '../shared/types';
 import type {
   ErrorResponse,
   ExtensionMessage,
@@ -76,7 +78,12 @@ function clearStreamState(state: StreamState | null): void {
 }
 
 function openOptions(): void {
-  void sendMessage({ type: 'OPEN_OPTIONS' });
+  sendMessage({ type: 'OPEN_OPTIONS' }).catch((err) => {
+    showBubble('error', friendlyError(err), {
+      x: window.innerWidth - 40,
+      y: 24,
+    });
+  });
 }
 
 function friendlyError(err: unknown): string {
@@ -193,14 +200,12 @@ function getSelectionRange(): Range | null {
   return sel.getRangeAt(0).cloneRange();
 }
 
-async function shouldAutoTranslate(): Promise<boolean> {
+async function getSettingsSafe(): Promise<Settings | null> {
   try {
     const res = await sendMessage({ type: 'GET_SETTINGS' });
-    return res.ok && 'settings' in res
-      ? Boolean(res.settings.autoTranslateOnSelect)
-      : false;
+    return res.ok && 'settings' in res ? res.settings : null;
   } catch {
-    return false;
+    return null;
   }
 }
 
@@ -213,6 +218,12 @@ async function isStreamingEnabled(): Promise<boolean> {
   } catch {
     return true;
   }
+}
+
+function isSameLanguage(text: string, target: TargetLanguage | undefined): boolean {
+  if (!target) return false;
+  const detected = detectLanguage(text);
+  return detected !== null && langFamily(detected) === langFamily(target);
 }
 
 function onMouseUp(e: MouseEvent): void {
@@ -235,10 +246,12 @@ function onMouseUp(e: MouseEvent): void {
       const selRange = getSelectionRange();
       if (!rect) return;
       const { x, y } = lastMouseUp;
-      if (await shouldAutoTranslate()) {
+      const settings = await getSettingsSafe();
+      const sameLang = isSameLanguage(text, settings?.targetLanguage);
+      if (settings?.autoTranslateOnSelect) {
         hideSelectionToolbar();
         closeRewritePanel();
-        void translateSelectionAt(text, x, y);
+        if (!sameLang) void translateSelectionAt(text, x, y);
         return;
       }
       closeRewritePanel();
@@ -250,6 +263,7 @@ function onMouseUp(e: MouseEvent): void {
           showRewritePanel(text, selRange, rect);
         },
         onOpenSettings: openOptions,
+        translateDisabled: sameLang,
       });
     })();
   }, 10);

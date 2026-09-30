@@ -15,29 +15,51 @@
 
       <form id="settings-form">
         <div class="page-layout">
-          <nav class="settings-nav">
+          <nav class="settings-nav wt-select-list">
             <button
               type="button"
-              class="settings-nav-item active"
+              class="settings-nav-item wt-select-item is-selected"
               data-section="provider"
-              data-i18n="secNavProvider"
             >
-              提供商设置
+              <span data-i18n="secNavProvider">提供商设置</span>
+              <svg
+                class="wt-check"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
             </button>
             <button
               type="button"
-              class="settings-nav-item"
+              class="settings-nav-item wt-select-item"
               data-section="prefs"
-              data-i18n="secPrefs"
             >
-              翻译偏好
+              <span data-i18n="secPrefs">翻译偏好</span>
+              <svg
+                class="wt-check"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
             </button>
           </nav>
 
           <div class="settings-content">
             <section id="section-provider" class="settings-section">
               <div class="provider-layout">
-                <div id="provider-list" class="provider-list"></div>
+                <div id="provider-list" class="provider-list wt-select-list"></div>
 
                 <div class="provider-panel">
                   <div class="panel-head">
@@ -85,27 +107,23 @@
                   <div id="lang-dropdown"></div>
                 </div>
                 <div class="field">
-                  <div class="switch-row">
+                  <label class="switch-row">
                     <span class="field-label" data-i18n="labelAutoTranslate">选中立即翻译</span>
-                    <input
-                      id="autoTranslate"
-                      class="wt-checkbox"
-                      type="checkbox"
-                    />
-                  </div>
+                    <span class="wt-switch">
+                      <input id="autoTranslate" type="checkbox" role="switch" />
+                    </span>
+                  </label>
                   <small class="wt-hint" data-i18n="hintAutoTranslate"
                     >开启后选中文本立即翻译，不再显示工具条。</small
                   >
                 </div>
                 <div class="field">
-                  <div class="switch-row">
+                  <label class="switch-row">
                     <span class="field-label" data-i18n="labelStreaming">流式输出</span>
-                    <input
-                      id="streaming"
-                      class="wt-checkbox"
-                      type="checkbox"
-                    />
-                  </div>
+                    <span class="wt-switch">
+                      <input id="streaming" type="checkbox" role="switch" />
+                    </span>
+                  </label>
                   <small class="wt-hint" data-i18n="hintStreaming"
                     >逐字显示翻译过程，关闭后一次性返回结果。</small
                   >

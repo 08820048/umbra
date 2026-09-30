@@ -140,6 +140,9 @@
   "hintStreaming": {
     "message": "Reveal the translation progressively; off returns the full result at once."
   },
+  "noTranslateNeeded": {
+    "message": "Already in the target language — no translation needed"
+  },
   "footerBy": {
     "message": "© 2025 Umbra. Made with love by"
   },

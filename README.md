@@ -62,7 +62,7 @@ API 请求均由 **background service worker** 发起，API Key 保存在 `chrom
 npm run dev
 ```
 
-使用 Vite + `@crxjs/vite-plugin` 进行 MV3 开发构建。
+使用 Vite + `@crxjs/vite-plugin` 进行 MV3 开发构建。列表选中动画和布尔开关见 [docs/设计规约.md](docs/设计规约.md)。
 
 ## 目录结构
 

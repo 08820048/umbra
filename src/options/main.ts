@@ -15,6 +15,11 @@ import {
 import { sendMessage } from '../shared/messaging';
 import { applyI18n, t } from '../shared/i18n';
 import { createDropdown, DropdownOption } from '../shared/dropdown';
+import {
+  makeSelectCheck,
+  placeSelectIndicator,
+  watchSelectIndicator,
+} from '../shared/selectList';
 
 applyI18n();
 const pageTitle = t('optionsTitle');
@@ -51,27 +56,40 @@ function setStatus(text: string, kind: 'ok' | 'err' | '' = ''): void {
   statusEl.className = `status ${kind}`.trim();
 }
 
+function syncProviderSelection(animate: boolean): void {
+  providerList.querySelectorAll<HTMLButtonElement>('.provider-item').forEach((item) => {
+    item.classList.toggle('is-selected', item.dataset.provider === selectedProviderId);
+  });
+  const active = providerList.querySelector<HTMLElement>('.provider-item.is-selected');
+  if (active) placeSelectIndicator(providerList, active, animate);
+}
+
 function renderProviderList(): void {
-  providerList.innerHTML = '';
+  providerList.replaceChildren();
   PROVIDERS.forEach((p) => {
     const item = document.createElement('button');
     item.type = 'button';
-    item.className =
-      'provider-item' + (p.id === selectedProviderId ? ' selected' : '');
-    item.textContent = t(`provName_${p.id}`) || p.name;
+    item.className = 'provider-item wt-select-item';
+    item.dataset.provider = p.id;
+    const name = document.createElement('span');
+    name.textContent = t(`provName_${p.id}`) || p.name;
+    item.append(name, makeSelectCheck());
     item.addEventListener('click', () => {
+      if (selectedProviderId === p.id) return;
       selectedProviderId = p.id;
-      renderProviderList();
+      syncProviderSelection(true);
       applyProvider(p, '');
-      const name = t(`provName_${p.id}`) || p.name;
+      const shown = t(`provName_${p.id}`) || p.name;
       setStatus(
         p.needsKey
-          ? t('stProviderNeedsKey', name)
-          : t('stProviderNoKey', name),
+          ? t('stProviderNeedsKey', shown)
+          : t('stProviderNoKey', shown),
       );
     });
     providerList.appendChild(item);
   });
+  syncProviderSelection(false);
+  watchSelectIndicator(providerList, '.provider-item.is-selected');
 }
 
 function toDropdownOptions(models: string[]): DropdownOption[] {
@@ -178,11 +196,19 @@ modelDropdown.onChange((id) => {
 });
 
 function initNav(): void {
+  const nav = document.querySelector<HTMLElement>('.settings-nav');
+  if (!nav) return;
   const navItems =
-    document.querySelectorAll<HTMLButtonElement>('.settings-nav-item');
+    nav.querySelectorAll<HTMLButtonElement>('.settings-nav-item');
+  const sync = (animate: boolean): void => {
+    const active = nav.querySelector<HTMLElement>('.settings-nav-item.is-selected');
+    if (active) placeSelectIndicator(nav, active, animate);
+  };
   navItems.forEach((item) => {
     item.addEventListener('click', () => {
-      navItems.forEach((i) => i.classList.toggle('active', i === item));
+      if (item.classList.contains('is-selected')) return;
+      navItems.forEach((i) => i.classList.toggle('is-selected', i === item));
+      sync(true);
       document
         .querySelectorAll<HTMLElement>('.settings-section')
         .forEach((section) => {
@@ -190,6 +216,8 @@ function initNav(): void {
         });
     });
   });
+  sync(false);
+  watchSelectIndicator(nav, '.settings-nav-item.is-selected');
 }
 initNav();
 

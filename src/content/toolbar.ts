@@ -35,6 +35,11 @@ function ensureStyles(): void {
       white-space: nowrap;
     }
     #${TOOLBAR_ID} .wt-toolbar-btn:hover { background: #2d5a8a; }
+    #${TOOLBAR_ID} .wt-toolbar-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      background: #1b365d;
+    }
     #${TOOLBAR_ID} .wt-toolbar-btn.secondary {
       background: #e8e6dc;
       color: #3d3d3a;
@@ -60,17 +65,24 @@ export interface SelectionToolbarActions {
   onTranslate: () => void;
   onRewrite: () => void;
   onOpenSettings: () => void;
+  translateDisabled?: boolean;
 }
 
 function makeButton(
   label: string,
   secondary: boolean,
   onClick: () => void,
+  disabled = false,
 ): HTMLButtonElement {
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = secondary ? 'wt-toolbar-btn secondary' : 'wt-toolbar-btn';
   btn.textContent = label;
+  if (disabled) {
+    btn.disabled = true;
+    btn.title = t('noTranslateNeeded') || 'Already in the target language';
+    return btn;
+  }
   // mousedown 阻止默认行为，避免点击时丢失选区
   btn.addEventListener('mousedown', (e) => e.preventDefault());
   btn.addEventListener('click', (e) => {
@@ -147,7 +159,12 @@ export function showSelectionToolbar(
   el.id = TOOLBAR_ID;
   el.setAttribute('role', 'toolbar');
   el.append(
-    makeButton(t('toolbarTranslate') || 'Translate', false, actions.onTranslate),
+    makeButton(
+      t('toolbarTranslate') || 'Translate',
+      false,
+      actions.onTranslate,
+      actions.translateDisabled ?? false,
+    ),
     makeButton(t('toolbarRewrite') || 'Translate to', true, actions.onRewrite),
     makeSettingsButton(actions.onOpenSettings),
   );

@@ -35,6 +35,9 @@
   /* shape */
   --wt-radius: 8px;
   --wt-radius-pill: 999px;
+  /* motion：列表高亮、勾选、胶囊滑块共用这一条弹簧曲线 */
+  --wt-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --wt-spring-duration: 0.48s;
 }
 
 /* 共享组件（popup / options / 划词气泡） */
@@ -228,4 +231,135 @@
   text-align: center;
   font-size: 12px;
   color: var(--wt-text-4);
+}
+
+/* 单选列表：高亮在项之间弹簧滑动，勾选在项内弹入。不作用在旁边的内容区。
+ * 容器自己须是定位包含块（relative，或已有的 sticky）。用法见 docs/设计规约.md */
+.wt-select-item {
+  position: relative;
+  z-index: 1;
+}
+.wt-select-item.is-selected,
+.wt-select-item.is-selected:hover {
+  background: transparent;
+  border-color: transparent;
+  color: var(--wt-brand);
+  font-weight: 500;
+}
+.wt-select-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: var(--wt-radius);
+  background: var(--wt-brand-tint);
+  border: 1px solid var(--wt-brand);
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    transform var(--wt-spring-duration) var(--wt-spring),
+    width var(--wt-spring-duration) var(--wt-spring),
+    height var(--wt-spring-duration) var(--wt-spring);
+}
+.wt-select-indicator.placed {
+  visibility: visible;
+}
+.wt-check {
+  width: 13px;
+  height: 13px;
+  margin-left: auto;
+  flex: none;
+  color: var(--wt-brand);
+  opacity: 0;
+  transform: scale(0.25);
+  filter: blur(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, filter 0.15s ease;
+}
+.wt-select-item.is-selected .wt-check {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  animation: wt-spring-pop var(--wt-spring-duration) var(--wt-spring) both;
+}
+@keyframes wt-spring-pop {
+  0% {
+    transform: scale(0.25);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  55% {
+    transform: scale(1.25);
+    opacity: 1;
+    filter: blur(0);
+  }
+  75% {
+    transform: scale(0.92);
+  }
+  90% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 布尔设置：胶囊滑块。圆点画在外壳上，因为 input 不生成 ::after。 */
+.wt-switch {
+  position: relative;
+  display: inline-flex;
+  width: 36px;
+  height: 22px;
+  flex: none;
+}
+.wt-switch input {
+  box-sizing: border-box;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 1px solid var(--wt-border);
+  border-radius: var(--wt-radius-pill);
+  background: var(--wt-sand);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.wt-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--wt-surface);
+  box-shadow: 0 1px 2px rgba(20, 20, 19, 0.18);
+  pointer-events: none;
+  transition: transform 0.32s var(--wt-spring);
+}
+.wt-switch:has(input:checked) input {
+  background: var(--wt-brand);
+  border-color: var(--wt-brand);
+}
+.wt-switch:has(input:checked)::after {
+  transform: translateX(14px);
+}
+.wt-switch input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--wt-brand-tint);
+}
+.wt-switch:has(input:disabled) {
+  opacity: 0.55;
+}
+.wt-switch:has(input:disabled) input {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wt-select-indicator,
+  .wt-check,
+  .wt-switch input,
+  .wt-switch::after {
+    animation: none;
+    transition: none;
+  }
 }
