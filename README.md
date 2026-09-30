@@ -2,6 +2,8 @@
 
 Chrome / Edge 浏览器扩展：划词翻译 + 全文翻译，使用 OpenAI 兼容 Chat Completions API（自带 API Key / BYOK）。
 
+代码以 [MIT 许可证](LICENSE) 开源。
+
 ## 功能
 
 - **划词翻译**：选中文本后浮出「翻译」按钮，点击后弹出浮动气泡显示译文
