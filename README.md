@@ -88,3 +88,4 @@ web-translator/
 - `chrome://`、`edge://`、Chrome 网上应用店等受限页面无法注入内容脚本
 - 全文翻译会批量请求模型，长页面可能消耗较多 Token，耗时取决于模型与网速
 - 请勿将含真实 API Key 的配置提交到公开仓库
+- 隐私政策（公开）：https://gist.github.com/08820048/b2ba7bf47854d6eb32a8ac3ab2d1cff3

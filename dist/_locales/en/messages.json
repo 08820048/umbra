@@ -146,6 +146,9 @@
   "footerBy": {
     "message": "© 2025 Umbra. Made with love by"
   },
+  "privacyPolicy": {
+    "message": "Privacy policy"
+  },
   "stSaved": {
     "message": "Settings saved."
   },
