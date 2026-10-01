@@ -20,7 +20,7 @@ Chrome / Edge 浏览器扩展：划词翻译 + 全文翻译，使用 OpenAI 兼�
 - **划词翻译**：选中文本后浮出「翻译」按钮，点击后弹出浮动气泡显示译文
 - **全文翻译**：一键翻译页面可见文本，并可恢复原文
 - **BYOK**：在选项页配置 Base URL、API Key、模型与目标语言
-- 兼容 OpenAI、DeepSeek、Moonshot 等 OpenAI 兼容接口
+- 兼容任意 OpenAI 兼容接口（可自定义 Base URL）
 - 默认目标语言：简体中文（zh）
 
 ## 环境要求

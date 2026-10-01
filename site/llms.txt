@@ -1,0 +1,12 @@
+# Umbra
+
+Umbra 是 Chrome 与 Edge 的 Manifest V3 扩展，做划词翻译和整页翻译。模型接口由用户自己提供，兼容 OpenAI Chat Completions。扩展以 MIT 许可证开源，安装免费。
+
+密钥、Base URL、模型和翻译偏好保存在本机的 chrome.storage.local。作者不接收网页正文、译文或密钥。只有用户主动翻译，或打开「选中立即翻译」时，文本才会发往用户填写的接口。
+
+当前版本 1.0.0 已提交 Chrome 网上应用店审核，商店页面还没有公开地址。安装方式是克隆仓库后执行 npm install && npm run build，再加载 dist。构建需要 Node.js 18 或更高版本。
+
+- 源码: https://github.com/08820048/umbra
+- 隐私政策: https://gist.github.com/08820048/b2ba7bf47854d6eb32a8ac3ab2d1cff3
+- 作者: https://x.com/xuyidev
+- 详细说明: llms-full.txt

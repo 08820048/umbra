@@ -1,0 +1,133 @@
+{
+  "type": "landing-page",
+  "lang": "cn",
+  "brief": {
+    "audience": "想在 Chrome 或 Edge 里用自己的模型接口翻译网页的人",
+    "job": "说明 Umbra 做什么、密钥留在哪里、现在如何安装",
+    "template": "landing-page",
+    "formats": ["html"],
+    "page_target": 1,
+    "narrative": "先说划词和整页，再出示真实界面，然后说明数据边界和免费安装",
+    "required_facts": [
+      "Chrome 与 Edge",
+      "MIT",
+      "1.0.0",
+      "chrome.storage.local",
+      "OpenAI 兼容接口",
+      "Node.js 18"
+    ],
+    "required_assets": [
+      "images/icon128.png",
+      "images/options-provider.jpg",
+      "images/options-prefs.jpg",
+      "images/popup.jpg"
+    ],
+    "acceptance_checks": ["1280 与 375 截图", "无虚构指标", "无商店公开链接"],
+    "preserve": [],
+    "explicit_deviations": ["尚无自有域名，canonical 指向 https://umbra-cmy.pages.dev/"]
+  },
+  "content": {
+    "category": "浏览器扩展",
+    "product_name": "Umbra",
+    "tagline": "用你的密钥，翻译选中或整页。",
+    "facts": ["Chrome / Edge", "自带密钥", "MIT"],
+    "cta": {
+      "primary": "查看源码",
+      "secondary": "安装说明"
+    },
+    "gallery": [
+      {
+        "image": "images/options-provider.jpg",
+        "caption": "内置常用接口预设，也可填自定义地址。"
+      },
+      {
+        "image": "images/options-prefs.jpg",
+        "caption": "目标语言、划词即译、流式输出。"
+      },
+      {
+        "image": "images/popup.jpg",
+        "caption": "翻译整页，或把页面恢复成原文。"
+      }
+    ],
+    "features": [
+      {
+        "name": "划词翻译",
+        "subtitle": "选中后出现",
+        "description": "选中网页文字后出现「翻译」。这段文字若已是目标语言，按钮停用，请求也不发出。"
+      },
+      {
+        "name": "全文翻译",
+        "subtitle": "可恢复原文",
+        "description": "从弹窗或右键菜单开始。翻译整页，或把页面恢复成原文。"
+      },
+      {
+        "name": "自带密钥",
+        "subtitle": "兼容 Chat Completions",
+        "description": "在选项页填写 Base URL、密钥和模型。内置常用接口预设，也可自填地址。"
+      },
+      {
+        "name": "流式输出",
+        "subtitle": "边到边显示",
+        "description": "打开后，译文随接口返回逐段出现。关掉，则等完整结果再显示。"
+      }
+    ],
+    "principles": [
+      {
+        "title": "密钥留在本机",
+        "description": "设置写在 chrome.storage.local。作者收不到密钥、选中文本或译文。"
+      },
+      {
+        "title": "只在翻译时送出",
+        "description": "打开网页不会上传正文。你点翻译，或打开「选中立即翻译」，文本才发往你填的接口。"
+      },
+      {
+        "title": "接口由你填写",
+        "description": "请求走 OpenAI 兼容的 /chat/completions。Ollama 默认连本机。"
+      },
+      {
+        "title": "同语言不再请求",
+        "description": "选中文本若已属目标语言，划词即译会跳过。"
+      }
+    ],
+    "pricing": {
+      "price": "免费 · MIT",
+      "benefits": [
+        "划词翻译，也能整页替换",
+        "密钥存在本机，不经过作者",
+        "内置常用接口预设，外加自定义地址",
+        "译文可逐段出现，整页可恢复",
+        "源码以 MIT 许可证公开"
+      ],
+      "terms": "扩展免费。模型费用由接口服务商收取。Chrome 与 Edge 支持 Manifest V3。"
+    },
+    "faq": [
+      {
+        "q": "它和浏览器自带翻译有什么不同？",
+        "a": "Umbra 不自带模型。译文来自你配置的 OpenAI 兼容接口，密钥在你这边。"
+      },
+      {
+        "q": "现在能从 Chrome 商店安装吗？",
+        "a": "1.0.0 已提交审核，商店页面还没有公开地址。当前从源码构建，再加载 dist。"
+      },
+      {
+        "q": "扩展免费吗？",
+        "a": "扩展本身免费，以 MIT 许可证开源。调用模型的费用由你的接口服务商收取。"
+      },
+      {
+        "q": "作者能看到我翻译的内容吗？",
+        "a": "不能。请求从浏览器直接发到你填写的接口，不经过 Umbra 的服务器。"
+      },
+      {
+        "q": "支持哪些浏览器？",
+        "a": "Chrome 与 Edge 的 Manifest V3。开发和构建需要 Node.js 18 或更高版本。"
+      },
+      {
+        "q": "支持哪些接口？",
+        "a": "内置常用接口预设，也可填写自定义 Base URL。"
+      }
+    ],
+    "footer": {
+      "ethos": "密钥留在这台电脑上。"
+    }
+  }
+}
