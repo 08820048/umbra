@@ -35,6 +35,6 @@ export default defineManifest({
       run_at: 'document_idle',
     },
   ],
-  permissions: ['storage', 'activeTab', 'contextMenus', 'scripting'],
+  permissions: ['storage', 'contextMenus'],
   host_permissions: ['<all_urls>'],
 });
